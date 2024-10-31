@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.senai.sp.jandira.mobile_aquarela.screens.CadastroTela
 import br.senai.sp.jandira.mobile_aquarela.screens.LoginTela
 import br.senai.sp.jandira.mobile_aquarela.screens.Preferencias
 import br.senai.sp.jandira.mobile_aquarela.screens.TelaInicial
@@ -30,6 +31,7 @@ class MainActivity : ComponentActivity() {
                     composable(route = "Inicio"){ TelaInicial(controleDeNavegacao) }
                     composable(route = "Login"){ LoginTela(controleDeNavegacao) }
                     composable(route = "Preferencias") { Preferencias(controleDeNavegacao) }
+                    composable(route = "Cadastro Tela") {CadastroTela(controleDeNavegacao) }
                 }
             }
         }
