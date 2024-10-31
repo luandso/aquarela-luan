@@ -81,6 +81,8 @@ fun CadastroTela(controleDeNavegacao : NavHostController){
             var telefoneUsuarioState by remember {
                 mutableStateOf("")
             }
+            var estaVazioState by remember {
+                mutableStateOf("Campo obrigatório")}
             Row(modifier = Modifier
                 .fillMaxWidth()
                 .padding(4.dp)){
