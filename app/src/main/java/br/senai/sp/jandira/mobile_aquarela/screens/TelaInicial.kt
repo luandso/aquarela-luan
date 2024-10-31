@@ -77,7 +77,7 @@ fun TelaInicial(controleDeNavegacao: NavHostController) {
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Button(
-                        onClick = { /* Ação de cadastro */ },
+                        onClick = {controleDeNavegacao.navigate("Cadastro Tela")},
                         modifier = Modifier
                             .width(300.dp)
                             .height(50.dp),
