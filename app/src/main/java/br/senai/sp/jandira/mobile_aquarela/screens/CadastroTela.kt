@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.mobile_aquarela.screens
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +27,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
@@ -103,7 +105,10 @@ Text(text = "Cadastre-se", fontSize = 32.sp, color = Color(0xff3E7D8D), fontWeig
                 .fillMaxWidth()
                 .height(500.dp), horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceEvenly){
-                OutlinedTextField(value = nomeCompletoState, onValueChange = {nomeCompletoState = it}, colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)), leadingIcon = { Icon(imageVector = Icons.Default.PermIdentity, contentDescription = " ", tint = Color(0xff3E7D8D)) }, label = { Text(modifier = Modifier.padding(start = 10.dp), fontFamily = FontFamily.Default, fontSize = 14.sp, fontStyle = FontStyle.Normal, fontWeight = FontWeight.Light, text = "Nome completo")}, singleLine = true )
+                OutlinedTextField(value = nomeCompletoState, onValueChange = {nomeCompletoState = it}, colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4), errorContainerColor = MaterialTheme.colorScheme.error), leadingIcon = { Icon(imageVector = Icons.Default.PermIdentity, contentDescription = " ", tint = Color(0xff3E7D8D)) }, label = { Text(modifier = Modifier.padding(start = 10.dp), fontFamily = FontFamily.Default, fontSize = 14.sp, fontStyle = FontStyle.Normal, fontWeight = FontWeight.Light, text = "Nome completo")}, singleLine = true )
+                if(nomeCompletoState.isEmpty()){
+                    Text(text = "")
+                }
                 OutlinedTextField(value = apelidoState, onValueChange = {apelidoState = it}, colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)), label = {Text(text = "Apelido")}, leadingIcon = {
                     Image(painter = painterResource(id = R.drawable.icon), contentDescription = " ", modifier = Modifier
                         .height(50.dp)
@@ -120,7 +125,7 @@ Text(text = "Cadastre-se", fontSize = 32.sp, color = Color(0xff3E7D8D), fontWeig
                     Icon(imageVector = Icons.Default.Cake, contentDescription = "", tint = Color(0xff3E7D8D))}, singleLine = true)
                 OutlinedTextField(value = telefoneUsuarioState, onValueChange = {telefoneUsuarioState = it}, colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)), label = {Text(text = "Telefone")}, leadingIcon = {
                     Icon(imageVector = Icons.Default.Phone, contentDescription = " ", tint = Color(0xff3E7D8D))}, singleLine = true)
-            }
+                }
             Button(onClick = {
                 val callUsuarios = RetrofitFactory().getCadastroService().inserirUsuarios(
                     cadastros = UsuarioCompleto(
@@ -137,16 +142,22 @@ Text(text = "Cadastre-se", fontSize = 32.sp, color = Color(0xff3E7D8D), fontWeig
                         user_stats = true
                     )
                 )
-                callUsuarios.enqueue(object : Callback<ResultUsuarioIncompleto>{
-                    override fun onResponse(p0: Call<ResultUsuarioIncompleto>, p1: Response<ResultUsuarioIncompleto>) {
-                        Log.i("foi", p1.body().toString())
-                        controleDeNavegacao.navigate("Preferencias")
-                    }
+                if(nomeCompletoState == "" || apelidoState == "" || emailState == "" || senhaState == "" || cpfState == "" || dataDeNascimentoUsuarioState == "" || telefoneUsuarioState == "") {
+                    Log.i("tag", "Campos obrigatórios")
+                }else{
+                    callUsuarios.enqueue(object : Callback<ResultUsuarioIncompleto>{
+                        override fun onResponse(p0: Call<ResultUsuarioIncompleto>, p1: Response<ResultUsuarioIncompleto>) {
+                            Log.i("foi", p1.body().toString())
+                            controleDeNavegacao.navigate("Preferencias")
+                        }
 
-                    override fun onFailure(p0: Call<ResultUsuarioIncompleto>, p1: Throwable) {
-                        Log.i("falhou", p1.toString())
-                    }
-                })},modifier = Modifier
+                        override fun onFailure(p0: Call<ResultUsuarioIncompleto>, p1: Throwable) {
+                            Log.i("falhou", p1.toString())
+                        }
+                    })
+                }
+
+               },modifier = Modifier
                     .width(270.dp)
                     .height(50.dp)
                     .background(
