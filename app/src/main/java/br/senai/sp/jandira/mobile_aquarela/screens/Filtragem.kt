@@ -1,6 +1,5 @@
 package br.senai.sp.jandira.mobile_aquarela.screens
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -37,43 +36,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.mobile_aquarela.R
-import br.senai.sp.jandira.mobile_aquarela.service.RetrofitFactory
-import kotlinx.coroutines.launch
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Feed(controleDeNavegacao: NavHostController, id: String?) {
+fun FiltragemScreen(controleDeNavegacao: NavHostController) { // Renomeado para FiltragemScreen
     var searchText by remember { mutableStateOf("") }
-    val feedService = RetrofitFactory().getFeedService()
-
-    val coroutineScope = rememberCoroutineScope()
-    var feedPreco by remember { mutableStateOf<Double?>(null) }
-    var isLoading by remember { mutableStateOf(true) }
-
-    LaunchedEffect(Unit) {
-        coroutineScope.launch {
-            try {
-                val response = feedService.getFeedPosts(1).execute()
-                if (response.isSuccessful) {
-                    feedPreco = response.body()?.firstOrNull()?.preco
-                    Log.i("Feed", "+++++++++++++++++++++++++++++++++++++++++++++++++++")
-                    Log.i("Feed", "Preço do primeiro post: ${feedPreco}")
-                } else {
-                    println("Erro na requisição: ${response.code()}")
-                }
-            } catch (e: Exception) {
-                println("Erro ao buscar dados do feed: ${e.message}")
-            } finally {
-                isLoading = false
-            }
-        }
-    }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFE2E8EB))
     ) {
+        // Imagem no topo
         Image(
             painter = painterResource(id = R.drawable.aquarelaazul),
             contentDescription = "Logo da Aquarela",
@@ -82,6 +57,7 @@ fun Feed(controleDeNavegacao: NavHostController, id: String?) {
                 .padding(top = 16.dp)
         )
 
+        // Barra de pesquisa
         OutlinedTextField(
             value = searchText,
             onValueChange = { searchText = it },
@@ -91,7 +67,7 @@ fun Feed(controleDeNavegacao: NavHostController, id: String?) {
                 .padding(16.dp)
                 .padding(top = 90.dp),
             leadingIcon = {
-                IconButton(onClick = { }) {
+                IconButton(onClick = { /* Ação de filtragem */ }) {
                     Icon(
                         imageVector = Icons.Filled.FilterList,
                         contentDescription = "Filtrar",
@@ -100,7 +76,7 @@ fun Feed(controleDeNavegacao: NavHostController, id: String?) {
                 }
             },
             trailingIcon = {
-                IconButton(onClick = { }) {
+                IconButton(onClick = { /* Ação de pesquisa */ }) {
                     Icon(
                         imageVector = Icons.Filled.Search,
                         contentDescription = "Pesquisar",
@@ -122,17 +98,9 @@ fun Feed(controleDeNavegacao: NavHostController, id: String?) {
         Column(modifier = Modifier.fillMaxSize()) {
             Spacer(modifier = Modifier.weight(1f))
 
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                if (isLoading) {
-                    Text("Carregando...", modifier = Modifier.align(Alignment.Center))
-                } else if (feedPreco != null) {
-                    Text("Preço: R$${feedPreco}", modifier = Modifier.align(Alignment.Center))
-                } else {
-                    Text("Erro ao carregar o preço.", modifier = Modifier.align(Alignment.Center))
-                }
-            }
-        }
-
+            // Box dentro do Column
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {}
+        }// Quadrado na parte de baixo com ícones
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
@@ -143,16 +111,18 @@ fun Feed(controleDeNavegacao: NavHostController, id: String?) {
             Row(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 64.dp),
+                    .padding(horizontal = 64.dp), // Aumenta o padding horizontal
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(horizontalArrangement = Arrangement.spacedBy(32.dp)) {
+            ) {// Row da esquerda (Home e Histórico)
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp) // Aumenta o espaçamento entre os ícones
+                ) {
                     Icon(
                         imageVector = Icons.Filled.Home,
                         contentDescription = "Home",
                         tint = Color(0xFF204149),
-                        modifier = Modifier.size(36.dp)
+                        modifier = Modifier.size(36.dp) // Aumenta o tamanho dos ícones
                     )
                     Icon(
                         imageVector = Icons.Filled.History,
@@ -161,7 +131,10 @@ fun Feed(controleDeNavegacao: NavHostController, id: String?) {
                         modifier = Modifier.size(36.dp)
                     )
                 }
-                Row(horizontalArrangement = Arrangement.spacedBy(32.dp)) {
+                // Row da direita (Chat e Perfil)
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
                     Icon(
                         imageVector = Icons.Filled.Chat,
                         contentDescription = "Chat",
@@ -176,14 +149,18 @@ fun Feed(controleDeNavegacao: NavHostController, id: String?) {
                     )
                 }
             }
-        }
+        }// Botão com borda branca
         Button(
-            onClick = {},
+            onClick = { /* Ação do botão */ },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .offset(y = (-15).dp)
                 .size(75.dp)
-                .border(width = 4.dp, color = Color.White, shape = RoundedCornerShape(47.dp)),
+                .border(
+                    width = 4.dp,
+                    color = Color.White,
+                    shape = RoundedCornerShape(47.dp)
+                ),
             shape = RoundedCornerShape(47.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF204149)),
             contentPadding = PaddingValues(0.dp)
@@ -197,7 +174,6 @@ fun Feed(controleDeNavegacao: NavHostController, id: String?) {
 
 @Preview(showBackground = true)
 @Composable
-fun FeedPreview() {
-    Feed(controleDeNavegacao = NavHostController(LocalContext.current), id = "1")
-
+fun FiltragemScreenPreview() {
+    FiltragemScreen(controleDeNavegacao = NavHostController(LocalContext.current))
 }

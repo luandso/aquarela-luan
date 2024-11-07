@@ -33,7 +33,13 @@ class MainActivity : ComponentActivity() {
                     composable(route = "Login"){ LoginTela(controleDeNavegacao) }
                     composable(route = "Preferencias") { Preferencias(controleDeNavegacao) }
                     composable(route = "Cadastro Tela") {CadastroTela(controleDeNavegacao) }
-                    composable(route = "Feed") { Feed(controleDeNavegacao) }
+                    composable(
+                        route = "feed/{id}"
+                    )
+                    { backStackEntry ->
+                        val id = backStackEntry.arguments?.getString("id")?.toIntOrNull() ?: 0
+                        Feed(controleDeNavegacao,id)
+                    }
 
                 }
             }
