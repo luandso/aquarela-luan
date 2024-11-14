@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -39,21 +40,21 @@ import br.senai.sp.jandira.mobile_aquarela.R
 @Composable
 fun RedefinirSuaSenhaTela() {
     var senha by remember{ mutableStateOf("") }
-    var redefinida by remember{ mutableStateOf(" ")}
-    Column(modifier = Modifier.fillMaxHeight().fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally){
+    var redefinida by remember{ mutableStateOf("")}
+    Column(modifier = Modifier.fillMaxHeight().fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(150.dp)){
         Box(modifier = Modifier.fillMaxWidth().padding(4.dp)){
-            Row(modifier = Modifier.fillMaxWidth()){ Icon(imageVector = Icons.Default.ArrowBack, tint = Color.White, modifier = Modifier.height(30.dp).width(30.dp).background(Color(0xff3E7D8D), shape = CircleShape).padding(4.dp), contentDescription = "")
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start){ Icon(imageVector = Icons.Default.ArrowBack, tint = Color.White, modifier = Modifier.height(30.dp).width(30.dp).background(Color(0xff3E7D8D), shape = CircleShape).padding(4.dp), contentDescription = "")
             }
         }
-        Card(modifier = Modifier.height(300.dp).align(Alignment.CenterHorizontally), colors = CardDefaults.cardColors(containerColor = Color.Transparent)){
+        Card(modifier = Modifier.height(350.dp).align(Alignment.CenterHorizontally), colors = CardDefaults.cardColors(containerColor = Color.Transparent)){
             Column(modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween, horizontalAlignment = Alignment.CenterHorizontally){
                 Icon(painter = painterResource(id = R.drawable.logo1), modifier = Modifier.height(80.dp).width(80.dp), contentDescription = "", tint = Color.Unspecified)
                 Text(text = " Redefinir a sua senha", fontSize = 18.sp, color = Color(0xff3E7D8D))
                 Text(text = " Você poderá fazer login na sua conta", fontSize = 10.sp, color = Color(0xff5DA5B7))
-                OutlinedTextField(onValueChange = {senha = it}, value = senha, colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)))
-                OutlinedTextField(onValueChange = {redefinida = it}, value = redefinida, colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)))
-                Button(onClick = {/* TO DO*/ }, modifier = Modifier.height(40.dp).width(138.dp).background(brush = Brush.verticalGradient(colors = listOf(Color(0xff5DA5B7), Color(0xff3E7D8D)))), colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)){
-                    Text(text = " Confirmar") }
+                OutlinedTextField(onValueChange = {senha = it}, value = senha, colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)), label = { Text(text = " Digite uma nova senha", fontSize = 12.sp) })
+                OutlinedTextField(onValueChange = {redefinida = it}, value = redefinida, colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)), label = { Text(text = "Confirme sua senha", fontSize = 12.sp) })
+                Button(onClick = {/* TO DO*/ }, modifier = Modifier.height(40.dp).width(138.dp).background(brush = Brush.verticalGradient(colors = listOf(Color(0xff5DA5B7), Color(0xff3E7D8D))), shape = RoundedCornerShape(8.dp)), colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)){
+                    Text(text = " Confirmar", fontSize = 10.sp) }
             }
         }
     }
