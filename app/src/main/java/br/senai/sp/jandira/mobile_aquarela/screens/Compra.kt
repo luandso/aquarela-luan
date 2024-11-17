@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -33,14 +34,14 @@ import br.senai.sp.jandira.mobile_aquarela.R
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Compra(controleDeNavegacao : NavHostController){
+fun Compra(){
     Column(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
         OutlinedTextField(onValueChange = {}, value = "", colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)), trailingIcon = { Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "", tint = Color.White) }, label = { Text(text = "Pesquisar") })
 
         Scaffold(bottomBar = {
             BottomAppBar(actions = {
                 NavigationBar(containerColor = Color.White){
-                    NavigationBarItem(selected = true, onClick = {controleDeNavegacao.navigate("Cadastro Tela")}, icon = {})
+                    NavigationBarItem(selected = true, onClick = {}, icon = {})
                     NavigationBarItem(selected = true, onClick = {}, icon = {})
                     FloatingActionButton(onClick = {}) { }
                     NavigationBarItem(selected = true, onClick = {}, icon = {})
@@ -52,13 +53,14 @@ fun Compra(controleDeNavegacao : NavHostController){
 //        IconButton(onClick = {})
             },
             )
-        }){Box(modifier = Modifier.fillMaxWidth().background(color = Color(0xff111111)).fillMaxHeight()){
-            Row { Image(painter = painterResource(id = R.drawable.logo1), contentDescription = "")
-                Column { Text(text = "")
-                    Text(text = "")
-                    Text(text = "")
-                }
-            }}
+        }){
+            LazyColumn {items(5){Box(modifier = Modifier.fillMaxWidth().background(color = Color(0xff111111))){
+                Row { Image(painter = painterResource(id = R.drawable.logo1), contentDescription = "")
+                    Column { Text(text = "")
+                        Text(text = "")
+                        Text(text = "")
+                    }
+                }}}  }
     }
 
 

@@ -41,12 +41,12 @@ class MainActivity : ComponentActivity() {
                     )
                     { backStackEntry ->
                         val id = backStackEntry.arguments?.getString("id")?.toIntOrNull() ?: 0
-                        Feed(controleDeNavegacao,id)
+                        Feed(controleDeNavegacao, id.toString())
                     }
 
 
-                    composable(route = "Compra") { Compra(controleDeNavegacao) }
-                    composable(route = "TabItem") { TabItem(controleDeNavegacao) }
+                    //composable(route = "Compra") { Compra(controleDeNavegacao) }
+                    composable(route = "TabItem") { TabItem(controleDeNavegacao, id.toString()) }
 
                 }
             }
