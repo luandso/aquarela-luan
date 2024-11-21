@@ -38,22 +38,22 @@ fun Compra(){
     Column(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
         OutlinedTextField(onValueChange = {}, value = "", colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)), trailingIcon = { Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "", tint = Color.White) }, label = { Text(text = "Pesquisar") })
 
-        Scaffold(bottomBar = {
-            BottomAppBar(actions = {
-                NavigationBar(containerColor = Color.White){
-                    NavigationBarItem(selected = true, onClick = {}, icon = {})
-                    NavigationBarItem(selected = true, onClick = {}, icon = {})
-                    FloatingActionButton(onClick = {}) { }
-                    NavigationBarItem(selected = true, onClick = {}, icon = {})
-                    NavigationBarItem(selected = true, onClick = {}, icon = {})
-                }/* IconButton(onClick = {}){}*/
-//        IconButton(onClick = {}){ }
-//        IconButton(onClick = {}){ }
-//        IconButton(onClick = {}){ }
-//        IconButton(onClick = {})
-            },
-            )
-        }){
+//        Scaffold(bottomBar = {
+//            BottomAppBar(actions = {
+//                NavigationBar(containerColor = Color.White){
+//                    NavigationBarItem(selected = true, onClick = {}, icon = {})
+//                    NavigationBarItem(selected = true, onClick = {}, icon = {})
+//                    FloatingActionButton(onClick = {}) { }
+//                    NavigationBarItem(selected = true, onClick = {}, icon = {})
+//                    NavigationBarItem(selected = true, onClick = {}, icon = {})
+//                }/* IconButton(onClick = {}){}*/
+////        IconButton(onClick = {}){ }
+////        IconButton(onClick = {}){ }
+////        IconButton(onClick = {}){ }
+////        IconButton(onClick = {})
+//            },
+//            )
+//        }){
             LazyColumn {items(5){Box(modifier = Modifier.fillMaxWidth().background(color = Color(0xff111111))){
                 Row { Image(painter = painterResource(id = R.drawable.logo1), contentDescription = "")
                     Column { Text(text = "")
@@ -61,7 +61,7 @@ fun Compra(){
                         Text(text = "")
                     }
                 }}}  }
-    }
+    //}
 
 
     }}
