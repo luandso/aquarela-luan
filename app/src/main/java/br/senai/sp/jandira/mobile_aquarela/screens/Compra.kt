@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -24,6 +25,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -35,8 +37,8 @@ import br.senai.sp.jandira.mobile_aquarela.R
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Compra(){
-    Column(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
-        OutlinedTextField(onValueChange = {}, value = "", colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)), trailingIcon = { Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "", tint = Color.White) }, label = { Text(text = "Pesquisar") })
+    Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally) {
+        OutlinedTextField(onValueChange = {}, value = "", colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)), trailingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "", tint = Color.White) }, label = { Text(text = "Pesquisar") })
 
         Scaffold(bottomBar = {
             BottomAppBar(actions = {
