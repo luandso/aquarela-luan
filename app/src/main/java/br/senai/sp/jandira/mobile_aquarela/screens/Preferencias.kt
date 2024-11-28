@@ -123,7 +123,7 @@ fun Preferencias(controleDeNavegacao: NavHostController) {
             )
 
             Button(
-                onClick = { /* Handle proxima action */ },
+                onClick = { controleDeNavegacao.navigate("feed/{id}") },
                 colors = ButtonDefaults.buttonColors(containerColor = Ciano),
                 modifier = Modifier.padding(start = 80.dp)
             ) {
