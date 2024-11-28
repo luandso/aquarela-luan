@@ -26,25 +26,25 @@ import br.senai.sp.jandira.mobile_aquarela.R
 @Composable
 fun Configuracoes(){
 Column(modifier = Modifier.fillMaxHeight().fillMaxWidth()){
-    Row(modifier = Modifier.fillMaxWidth()){
+    Row {
         Image(imageVector = Icons.Default.ArrowBack, contentDescription = "", modifier = Modifier.padding(4.dp).background(color = Color(0xff204149), shape = CircleShape).width(16.dp).height(16.dp))
         Text(text = "Configurações")
     }
-    Row(modifier = Modifier.fillMaxWidth()){ Image(imageVector = Icons.Default.Person, contentDescription = "")
+    Row { Image(imageVector = Icons.Default.Person, contentDescription = "")
     Column{ Text(text = "Perfil")
     Text(text = "Editar Perfil")
     }
     Row{ Image(imageVector = Icons.Default.ArrowForwardIos, contentDescription = "") }}
-    Row(modifier = Modifier.fillMaxWidth()){ Text(text = "Gerenciar Conta")
+    Row { Text(text = "Gerenciar Conta")
     Image(imageVector = Icons.Default.ArrowForwardIos, contentDescription = "")
     }
-    Row(modifier = Modifier.fillMaxWidth()){ Text(text = "Endereços")
+    Row { Text(text = "Endereços")
     Image(imageVector = Icons.Default.ArrowForwardIos, contentDescription = "")
     }
-    Row(modifier = Modifier.fillMaxWidth()){ Text(text = "Preferências")
+    Row { Text(text = "Preferências")
     Image(imageVector = Icons.Default.ArrowForwardIos, contentDescription = "")
     }
-    Row(modifier = Modifier.fillMaxWidth()){ Text(text = "Ajustar Feed Inicial")
+    Row { Text(text = "Ajustar Feed Inicial")
     Image(imageVector = Icons.Default.ArrowForwardIos, contentDescription = "")
     }
     Box {}
