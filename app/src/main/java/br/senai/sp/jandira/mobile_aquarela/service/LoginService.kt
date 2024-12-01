@@ -10,7 +10,7 @@ import retrofit2.http.POST
 
 interface LoginService {
     @Headers("Content-Type: application/json")
-    @POST("/v1/aquarela/user")
+    @POST("user")
     fun inserirUsuarios(@Body cadastros : UsuarioCompleto): Call<ResultUsuarioIncompleto>
 
     @Headers("Content-Type: application/json")

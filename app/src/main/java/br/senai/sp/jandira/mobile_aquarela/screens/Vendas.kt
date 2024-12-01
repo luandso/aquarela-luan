@@ -17,13 +17,14 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Vendas(){
-    Column(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
+    Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally) {
         OutlinedTextField(onValueChange = {}, value = "", colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color(0xffB8CED4), unfocusedBorderColor = Color.Transparent, focusedBorderColor = Color.Transparent, focusedContainerColor = Color(0xffB8CED4)), trailingIcon = { Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "", tint = Color.White) }, label = { Text(text = "Pesquisar") })
         Box(modifier = Modifier.fillMaxWidth())
         Scaffold(bottomBar = {
