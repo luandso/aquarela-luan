@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
@@ -17,6 +18,10 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.FabPosition
+
+import androidx.compose.material3.ExperimentalMaterial3Api
+
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -26,6 +31,7 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,8 +42,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun TabItem(controleDeNavegacao : NavHostController, id : String){
@@ -55,6 +63,7 @@ Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(), horizontalAlignment =
         tabItem.size
     }
     var tabIndex by remember { mutableStateOf(0) }
+
     Scaffold(bottomBar = {
         BottomAppBar(actions = {
             NavigationBar(containerColor = Color.White){
@@ -69,8 +78,13 @@ Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(), horizontalAlignment =
 //        IconButton(onClick = {}){ }
 //        IconButton(onClick = {})
         },
+
         )
-    }){Column() {
+    }, floatingActionButton = { FloatingActionButton(onClick = {}, modifier = Modifier.offset(y = 30.dp)){} }, floatingActionButtonPosition = FabPosition.Center, containerColor = Color.White, contentColor = Color.White)
+    {Column() {
+//
+        // {Column() {
+
 
         TabRow(selectedTabIndex = tabIndex, containerColor = Color(0x1A3E7D8D), indicator = {tabPositions -> if(tabIndex<tabPositions.size){TabRowDefaults.SecondaryIndicator(modifier = Modifier.tabIndicatorOffset(tabPositions[tabIndex]), color = Color(0xff3E7D8D))} }) {
             tabItem.forEachIndexed { index, tabItem ->
@@ -105,6 +119,8 @@ Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(), horizontalAlignment =
     }}
     }
     }
+
+
 @Composable
 @Preview(showBackground = true)
 fun TabItemPreview(){
